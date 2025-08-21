@@ -1,0 +1,230 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
+    visibility: hidden;
+}
+
+body.loaded {
+  visibility: visible;
+}
+
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+header {
+    width: 100%;
+    height: 60px;
+}
+
+header nav {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+header nav .nav-right-section {
+    width: 250px;
+    height: auto;
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+}
+
+nav .nav-right-section a{
+    margin-right: 10px;
+    color: #000000;
+}
+
+
+nav .nav-right-section img {
+    border-radius: 50%; /*redondea los bordes de la imagen*/
+    margin-left: 10px;
+}
+
+nav .nav-left h1{
+    margin-left: 20px;
+}
+
+main {
+    margin-top: 150px;
+    text-align: center;
+}
+
+main .main-logo {
+    width: 530px;
+    margin: 0 auto;
+    margin-bottom: 35px;
+}
+
+main .main-logo img {
+    width: 200px;
+}
+
+main .main-input {
+    width: 500px;
+    margin: 0 auto;
+    margin-bottom: 35px;
+}
+
+main .main-input-container {
+    width: 500px;
+    border-radius: 100px;
+    border: 1px solid #dfe1e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+main .main-input input {
+    width: 450px;
+    height: 40px;
+    border: none;
+    outline: none;
+}
+
+main .main-input select {
+    width: 450px;
+    height: 40px;
+    border: none;
+    outline: none;
+}
+
+main .main-input span {
+    width: 450px;
+    height: 40px;
+    border: none;
+    outline: none;
+}
+
+main .main-input strong  {
+    width: 450px;
+    height: 40px;
+    border: none;
+    outline: none;
+}
+
+main .main-input-container:hover {
+    box-shadow: 0 1px 6px #20212447;
+    border-color: #dfe1e500;
+}
+
+
+main .main-buttons {
+    width: 530px;
+    margin: 0 auto;
+}
+
+main .main-buttons div {
+    display: inline-block;
+}
+
+main .main-buttons button {
+    height: 36px;
+    background-color: #cd7510;
+    border: 0;
+    font-size: 14px;
+    color: #f8f8f8;
+    border-radius: 5px;
+    padding: 0 15px;
+    margin-right: 15px;
+}
+
+main .main-buttons button:hover {
+    border: 1px solid #c6c6c6;
+    box-shadow: 0px 1px 1px rgba(0,0,0,0.1);
+    color: #222;
+    background-color: #f8f8f8;
+}
+
+main .forget-pass {
+    margin-top: 20px;
+}
+
+/* Logo alineado a la izquierda */
+.nav-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.logo-empresa {
+    height: 40px;
+    width: auto;
+}
+
+/* Ya tienes esto pero ajustaremos un poco */
+header nav {
+    display: flex;
+    justify-content: space-between; /* Acomoda izquierda y derecha */
+    align-items: center; /* Centra verticalmente */
+    height: 60px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.tabla-contenedor {
+    width: 90%;
+    margin: 50px auto;
+    text-align: left;
+}
+
+.tabla-header {
+    margin-bottom: 15px;
+    text-align: right;
+}
+
+.btn-nuevo {
+    background-color: #1a73e8;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-nuevo:hover {
+    background-color: #1558b0;
+}
+
+.tabla-estilo {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-estilo th,
+.tabla-estilo td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+.tabla-estilo th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.tabla-estilo tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.tabla-estilo button {
+    background-color: #cd7510;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.tabla-estilo button:hover {
+    background-color: #a95f0c;
+}

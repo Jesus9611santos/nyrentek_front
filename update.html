@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practicando</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    
+     <header>
+        <nav>
+             <div class="nav-left">
+                <img src="/images/grp__NM__img__NM__logocr_600.png" alt="Logo empresa" class="logo-empresa">
+                <h1>Modulo de Pagos</h1>
+            </div>
+            <div class="nav-right">
+                <ul class="nav-right-section">
+                    <li><a href="#" onclick="closeSession()">Cerrar sesion</a></li>
+                    <li>
+                        <a href="#" onclick="profile()">
+                            <img src="/images/icon-7797704_1280.png" alt="Usuario" width="50px" title="Perfil de Usuario">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+     </header>
+
+     <main>
+        <form id="payment-form" enctype="multipart/form-data">
+        <section class="main-input">
+            <!-- Fecha y hora del pago -->
+             <h1>Registrando Pago</h1>
+            <div class="main-input-container">
+                <input type="datetime-local" id="date" name="date">
+            </div>
+
+            <!-- Select de bancos -->
+            <div class="main-input-container">
+            <select id="bank" name="bank">
+                <option value="" disabled selected>Selecciona un banco</option>
+                <option value="bbva">BBVA</option>
+                <option value="banamex">Banamex</option>
+                <option value="santander">Santander</option>
+                <option value="banorte">Banorte</option>
+                <!-- Puedes agregar más bancos -->
+            </select>
+            </div>
+
+            <!-- Monto -->
+            <div class="main-input-container">
+            <input type="number" step="0.01" id="mount" name="mount" placeholder="Monto del pago">
+            </div>
+
+            <!-- Subida de imagen -->
+            <div class="main-input-container" style="flex-direction: column; text-align: center; padding: 20px; border: 2px dashed #ccc;">
+            <label for="comprobante" style="margin-bottom: 10px;">Arrastra aquí tu comprobante o haz clic</label>
+            <input type="file" id="voucher" name="voucher" accept="image/*">
+            </div>
+        </section>
+
+        <section class="main-buttons">
+            <div>
+            <button type="button" onclick="back()">Volver</button>
+            </div>
+            <div>
+            <button type="submit">Guardar Pago</button>
+            </div>
+        </section>
+        </form>
+    </main>
+
+
+     <footer>
+   
+     </footer>
+     <script src="/js/app_back.js"></script>
+     <script src="/js/update.js"></script>
+     <script src="/js/sweetalert2@11.js"></script>
+</body>
+</html>
+

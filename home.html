@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practicando</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    
+     <header>
+        <nav>
+             <div class="nav-left">
+                <img src="/images/grp__NM__img__NM__logocr_600.png" alt="Logo empresa" class="logo-empresa">
+                <h1>Modulo de Pagos</h1>
+            </div>
+            <div class="nav-right">
+                <ul class="nav-right-section">
+                    <li><a href="#" onclick="closeSession()">Cerrar sesion</a></li>
+                    <li>
+                        <a href="#" onclick="profile()">
+                            <img src="/images/icon-7797704_1280.png" alt="Usuario" width="50px" title="Perfil de Usuario">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+     </header>
+
+     <main>
+        <section class="tabla-contenedor">
+            <div class="tabla-header">
+                <button class="btn-nuevo" onclick="newPayment()">Nuevo</button>
+            </div>
+
+            <table class="tabla-estilo">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fecha</th>
+                        <th>Banco</th>
+                        <th>Monto</th>
+                        <th>Comprobante</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+
+            </table>
+        </section>
+    </main>
+
+
+     <footer>
+   
+     </footer>
+
+     <script src="/js/app_back.js"></script>
+     <script src="/js/home.js"></script>
+     <script src="/js/sweetalert2@11.js"></script>
+</body>
+</html>
+
