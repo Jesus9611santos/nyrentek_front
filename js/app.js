@@ -22,7 +22,7 @@ async function checkToken() {
   }
 
   try {
-    const response = await fetch('http://practice.test/api/users/check', {
+    const response = await fetch('http://localhost:8089/api/users/check', {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Accept': 'application/json',

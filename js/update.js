@@ -15,7 +15,7 @@ function getPaymentIdFromUrl() {
 async function cargarPago(id) {
   const token = localStorage.getItem('auth_token');
   try {
-    const response = await fetch(`http://practice.test/api/payments/${id}`, {
+    const response = await fetch(`http://localhost:8089/api/lists/${id}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Accept': 'application/json',
@@ -26,42 +26,19 @@ async function cargarPago(id) {
       throw new Error('No se pudo obtener el pago');
     }
 
-    const payment = await response.json();
+    const list = await response.json();
 
-    // Formatear fecha para datetime-local (YYYY-MM-DDTHH:mm)
-    const fecha = new Date(payment.date);
-    const fechaFormateada = fecha.toISOString().slice(0,16);
-
-    document.getElementById('date').value = fechaFormateada;
-    document.getElementById('bank').value = payment.bank;
-    document.getElementById('mount').value = payment.mount;
-
-    mostrarImagenActual(payment.voucher);
+    document.getElementById('title').value = list.title;
+    document.getElementById('description').value = list.description;
+    document.getElementById('status').value = list.status;
 
   } catch (error) {
-    console.error('Error cargando pago:', error);
+    console.error('Error cargando:', error);
   }
-}
-
-function mostrarImagenActual(urlImagen) {
-  let contenedor = document.getElementById('img-voucher-container');
-  if (!contenedor) {
-    contenedor = document.createElement('div');
-    contenedor.id = 'img-voucher-container';
-    contenedor.style.margin = '10px 0';
-    const form = document.getElementById('payment-form');
-    form.querySelector('.main-input').appendChild(contenedor);
-  }
-  contenedor.innerHTML = `
-    <p>Comprobante actual:</p>
-    <a href="${urlImagen}" target="_blank">
-      <img src="${urlImagen}" alt="Comprobante actual" style="max-width: 200px; max-height: 200px;">
-    </a>
-  `;
 }
 
 function setupInputErrorListeners() {
-  const campos = ['date', 'bank', 'mount', 'voucher'];
+  const campos = ['title', 'description', 'status'];
   campos.forEach(id => {
     const input = document.getElementById(id);
     if (input) {
@@ -97,17 +74,12 @@ document.getElementById('payment-form').addEventListener('submit', async functio
   const token = localStorage.getItem('auth_token');
 
   const formData = new FormData();
-  formData.append('date', document.getElementById('date').value);
-  formData.append('bank', document.getElementById('bank').value);
-  formData.append('mount', document.getElementById('mount').value);
-
-  const voucherInput = document.getElementById('voucher');
-  if (voucherInput.files.length > 0) {
-    formData.append('voucher', voucherInput.files[0]);
-  }
+  formData.append('title', document.getElementById('title').value);
+  formData.append('description', document.getElementById('description').value);
+  formData.append('status', document.getElementById('status').value);
 
   try {
-    const response = await fetch(`http://practice.test/api/payments/${paymentId}`, {
+    const response = await fetch(`http://localhost:8089/api/lists/${paymentId}`, {
       method: 'POST',  // o PUT si tu backend lo acepta, revisa rutas
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -122,7 +94,7 @@ document.getElementById('payment-form').addEventListener('submit', async functio
     if (response.ok) {
       Swal.fire({
         icon: 'success',
-        title: '¡Pago actualizado con éxito!',
+        title: '¡Tarea actualizada con éxito!',
         confirmButtonColor: '#28a745'
       }).then(() => {
         window.location.href = "/index.html"; // o a donde quieras redirigir
@@ -154,10 +126,9 @@ function validarFormulario() {
   let isValid = true;
 
   const campos = [
-    { id: 'date', name: 'fecha' },
-    { id: 'bank', name: 'banco' },
-    { id: 'mount', name: 'monto' }
-    // voucher no obligatorio en update
+    { id: 'title', name: 'title' },
+    { id: 'description', name: 'description' },
+    { id: 'status', name: 'status' }
   ];
 
   campos.forEach(({id, name}) => {

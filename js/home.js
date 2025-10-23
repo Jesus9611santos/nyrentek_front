@@ -6,7 +6,7 @@ async function getPayments() {
   const token = localStorage.getItem('auth_token');
 
   try {
-    const response = await fetch('http://practice.test/api/payments', {
+    const response = await fetch('http://localhost:8089/api/lists', {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Accept': 'application/json',
@@ -14,34 +14,23 @@ async function getPayments() {
     });
 
     if (response.ok) {
-      const payments = await response.json();
+      const lists = await response.json();
 
       // Referencia al tbody
       const tbody = document.querySelector('.tabla-estilo tbody');
       tbody.innerHTML = ''; // Limpiar filas previas
 
-      payments.forEach(payment => {
-        // Formatear fecha (puedes ajustar según formato deseado)
-        const fecha = new Date(payment.date).toLocaleDateString('es-MX');
-
-        // Formatear monto con separador de miles y dos decimales
-        const monto = Number(payment.mount).toLocaleString('es-MX', { style: 'currency', currency: 'MXN' });
-
+      lists.forEach(list => {
         // Crear fila con datos
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td>${payment.id}</td>
-          <td>${fecha}</td>
-          <td>${payment.bank.toUpperCase()}</td>
-          <td>${monto}</td>
+          <td>${list.title}</td>
+          <td>${list.description}</td>
+          <td>${list.status}</td>
           <td>
-            <a href="${payment.voucher}" target="_blank">
-              <img src="${payment.voucher}" alt="Comprobante ${payment.id}" class="comprobante-img" width="50px">
-            </a>
-          </td>
-          <td>
-            <button onclick="editPayment(${payment.id})">Editar</button>
-            <button onclick="deletePayment(${payment.id})">Eliminar</button>
+            <button onclick="checkComplete(${list.id})">Completar</button>
+            <button onclick="editTask(${list.id})">Editar</button>
+            <button onclick="deletelist(${list.id})">Eliminar</button>
           </td>
         `;
         tbody.appendChild(tr);
@@ -54,7 +43,49 @@ async function getPayments() {
   }
 }
 
-async function deletePayment(id) {
+async function checkComplete(id) {
+  const token = localStorage.getItem('auth_token');
+
+   const result = await Swal.fire({
+    title: 'Deseas marcar como completada la tarea',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#24e824',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Sí',
+    cancelButtonText: 'Cancelar'
+  });
+
+  if (!result.isConfirmed) return;
+
+  try {
+    const response = await fetch(`http://localhost:8089/api/lists/complete/${id}`, {
+      method: 'put',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json',
+      }
+    });
+
+    if (response.ok) {
+      Swal.fire({
+        icon: 'success',
+        title: '¡Tarea completada!',
+        confirmButtonColor: '#28a745'
+      }).then(() => {
+        getPayments();
+      });
+      
+    } else {
+        console.error('Error en la respuesta:', response.status);
+    }
+
+    } catch (error) {
+        console.error('Error en la petición:', error);
+    }
+}
+
+async function deletelist(id) {
   const token = localStorage.getItem('auth_token');
 
    const result = await Swal.fire({
@@ -71,7 +102,7 @@ async function deletePayment(id) {
   if (!result.isConfirmed) return;
 
   try {
-    const response = await fetch(`http://practice.test/api/payments/${id}`, {
+    const response = await fetch(`http://localhost:8089/api/lists/${id}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -82,7 +113,7 @@ async function deletePayment(id) {
     if (response.ok) {
       Swal.fire({
         icon: 'success',
-        title: '¡Pago eliminado!',
+        title: '¡Tarea eliminada!',
         confirmButtonColor: '#28a745'
       }).then(() => {
         getPayments();
@@ -97,6 +128,6 @@ async function deletePayment(id) {
     }
 }
 
-function editPayment(id) {
+function editTask(id) {
     window.location.href = `update.html?id=${id}`;   
 }

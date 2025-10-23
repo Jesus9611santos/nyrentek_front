@@ -43,7 +43,7 @@ document.getElementById('recovery-form').addEventListener('submit', async functi
   };
 
   try {
-    const response = await fetch('http://practice.test/api/users/recovery', {
+    const response = await fetch('http://localhost:8089/api/users/recovery', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

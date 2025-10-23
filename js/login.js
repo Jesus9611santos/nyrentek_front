@@ -46,7 +46,7 @@ document.getElementById('login-form').addEventListener('submit', async function(
   };
 
   try {
-    const response = await fetch('http://practice.test/api/users/login', {
+    const response = await fetch('http://localhost:8089/api/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

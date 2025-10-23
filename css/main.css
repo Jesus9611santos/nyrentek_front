@@ -64,7 +64,7 @@ main .main-logo {
 }
 
 main .main-logo img {
-    width: 200px;
+    width: 300px;
 }
 
 main .main-input {
@@ -157,7 +157,7 @@ main .forget-pass {
 }
 
 .logo-empresa {
-    height: 40px;
+    height: 130px;
     width: auto;
 }
 

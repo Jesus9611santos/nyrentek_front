@@ -8,7 +8,7 @@ async function checkToken() {
   }
 
   try {
-    const response = await fetch('http://practice.test/api/users/check', {
+    const response = await fetch('http://localhost:8089/api/users/check', {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Accept': 'application/json',
@@ -36,7 +36,7 @@ async function checkToken() {
 async function closeSession() {
   const token = localStorage.getItem('auth_token');
     try {
-      await fetch('http://practice.test/api/users/logout', {
+      await fetch('http://localhost:8089/api/users/logout', {
         method: 'POST',  // Recuerda que logout suele ser POST
         headers: {
           'Authorization': `Bearer ${token}`,

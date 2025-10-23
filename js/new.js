@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function setupInputErrorListeners() {
   const campos = [
-    'date', 'bank', 'mount', 'voucher'
+    'title', 'description', 'status'
   ];
 
   campos.forEach(id => {
@@ -41,13 +41,12 @@ document.getElementById('payment-form').addEventListener('submit', async functio
 
     // Preparar datos para enviar como FormData (incluye archivos)
     const formData = new FormData();
-    formData.append('date', document.getElementById('date').value);
-    formData.append('bank', document.getElementById('bank').value);
-    formData.append('mount', document.getElementById('mount').value);
-    formData.append('voucher', document.getElementById('voucher').files[0]);
+    formData.append('title', document.getElementById('title').value);
+    formData.append('description', document.getElementById('description').value);
+    formData.append('status', document.getElementById('status').value);
 
     try {
-        const response = await fetch('http://practice.test/api/payments', {
+        const response = await fetch('http://localhost:8089/api/lists', {
             method: 'POST',
             headers: {
             'Authorization': `Bearer ${token}`,
@@ -62,7 +61,7 @@ document.getElementById('payment-form').addEventListener('submit', async functio
         if (response.ok) {
             Swal.fire({
                 icon: 'success',
-                title: '¡Pago registrado con éxito!',
+                title: '¡Tarea registrada con éxito!',
                 confirmButtonColor: '#28a745'
             }).then(() => {
                 window.location.href = "/index.html";
@@ -96,10 +95,9 @@ function validarFormulario() {
   let isValid = true;
 
   const campos = [
-    { id: 'date', name: 'date' },
-    { id: 'bank', name: 'bank' },
-    { id: 'mount', name: 'mount' },
-    { id: 'voucher', name: 'voucher' }
+    { id: 'title', name: 'title' },
+    { id: 'description', name: 'description' },
+    { id: 'status', name: 'status' }
   ];
 
   // Validar campos vacíos

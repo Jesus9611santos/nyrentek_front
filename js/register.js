@@ -3,30 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupInputErrorListeners();
 });
 
-async function getPlaces() {
-  try {
-    const response = await fetch('http://practice.test/api/places');
-    if (!response.ok) throw new Error('Error en la respuesta');
-
-    const data = await response.json();
-
-    const select = document.getElementById('fraccionamiento');
-
-    // Limpiar opciones previas excepto la primera
-    select.innerHTML = '<option value="" disabled selected>Selecciona un fraccionamiento</option>';
-
-    data.forEach(place => {
-      const option = document.createElement('option');
-      option.value = place.id;
-      option.textContent = place.name;
-      select.appendChild(option);
-    });
-
-  } catch (error) {
-    console.error('Error:', error);
-  }
-}
-
 document.getElementById('register-form').addEventListener('submit', async function(event) {
   event.preventDefault();
 
@@ -43,18 +19,15 @@ document.getElementById('register-form').addEventListener('submit', async functi
 
   // Preparar datos para enviar
   const formData = {
-    fraccionamiento: document.getElementById('fraccionamiento').value,
     nombre: document.getElementById('nombre').value,
     telefono: document.getElementById('telefono').value,
-    lote: document.getElementById('lote').value,
-    manzana: document.getElementById('manzana').value,
     email: document.getElementById('email').value,
     password: password,
     password_confirmation: confirmPassword,
   };
 
   try {
-    const response = await fetch('http://practice.test/api/users', {
+    const response = await fetch('http://localhost:8089/api/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -120,8 +93,7 @@ function mostrarError(input, mensaje) {
 
 function setupInputErrorListeners() {
   const campos = [
-    'fraccionamiento', 'nombre', 'telefono', 'lote',
-    'manzana', 'email', 'password', 'password_confirmation'
+    'nombre', 'telefono', 'email', 'password', 'password_confirmation'
   ];
 
   campos.forEach(id => {
@@ -147,11 +119,8 @@ function validarFormulario() {
   let isValid = true;
 
   const campos = [
-    { id: 'fraccionamiento', name: 'Fraccionamiento' },
     { id: 'nombre', name: 'Nombre' },
     { id: 'telefono', name: 'Teléfono' },
-    { id: 'lote', name: 'Lote' },
-    { id: 'manzana', name: 'Manzana' },
     { id: 'email', name: 'Email' },
     { id: 'password', name: 'Contraseña' },
     { id: 'password_confirmation', name: 'Confirmar contraseña' }
@@ -172,15 +141,6 @@ function validarFormulario() {
   const telefonoRegex = /^\d{10}$/;
   if (telefonoVal && !telefonoRegex.test(telefonoVal)) {
     mostrarError(telefonoInput, 'El teléfono debe tener 10 dígitos numéricos');
-    isValid = false;
-  }
-
-  // Validar lote: solo números (si quieres letras dime)
-  const loteInput = document.getElementById('lote');
-  const loteVal = loteInput.value.trim();
-  const loteRegex = /^\d+$/; // solo números
-  if (loteVal && !loteRegex.test(loteVal)) {
-    mostrarError(loteInput, 'El lote solo debe contener números');
     isValid = false;
   }
 
